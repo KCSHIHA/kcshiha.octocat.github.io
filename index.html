@@ -1,12 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的專案進度</title>
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的專案進度</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+      .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+    .progress-bar {
+      width: 80%;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    .progress-bar span {
+      display: block;
+      height: 20px;
+      border-radius: 5px;
+      background-color: #76c7c0;
+      width: 50%; /* 假設進度為 50% */
+    }
+  </style>
+  </head>
 <body>
-    <h1>歡迎來到我的專案頁面</h1>
-    <p>這是我專案的進度展示。</p>
+  <h1>我的專案進度</h1>
+  <div class="content">
+    <p>這是我的專案進度展示。以下是目前進度條：</p>
+    <div class="progress-bar">
+      <span></span>
+    </div>
+    <p>專案已完成 50%!</p>
+  </div>
 </body>
 </html>
