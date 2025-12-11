@@ -40,12 +40,10 @@
   </head>
 <body>
   <h1>我的專案進度</h1>
-  <div class="content">
-    <p>這是我的專案進度展示。以下是目前進度條：</p>
-    <div class="progress-bar">
-      <span></span>
-    </div>
-    <p>專案已完成 50%!</p>
+  <div class="file-upload">
+  <input type="file" id="excel-file" accept=".xlsx, .xls" />
+  <button onclick="uploadExcel()">上傳並顯示進度</button>
+  <div id="progress-container"></div>
   </div>
 </body>
 </html>
