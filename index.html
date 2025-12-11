@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>我的專案進度</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -45,5 +45,59 @@
   <button onclick="uploadExcel()">上傳並顯示進度</button>
   <div id="progress-container"></div>
   </div>
+   
+  <script>
+   
+    function uploadExcel() {
+      const fileInput = document.getElementById('excel-file');
+      const file = fileInput.files[0]; 
+      if (!file) {
+        alert("請選擇一個 Excel 檔案！");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const data = event.target.result;
+        const workbook = XLSX.read(data, { type: 'binary' });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+        displayProgress(jsonData);
+      };
+      reader.readAsBinaryString(file);
+    }
+    function displayProgress(data) {
+      const progressContainer = document.getElementById('progress-container');
+      progressContainer.innerHTML = ''; // 清空上次的進度顯示
+      data.forEach((row, index) => {
+        if (index === 0) return; // 跳過標題行
+        const stage = row[0];
+        const progress = row[1];
+        
+        const progressBarWrapper = document.createElement('div');
+        progressBarWrapper.style.margin = '10px 0';
+        const stageName = document.createElement('span');
+        stageName.textContent = `${stage}: ${progress}%`;
+        stageName.style.marginRight = '10px';
+
+        const progressBar = document.createElement('div');
+        progressBar.style.width = '80%';
+        progressBar.style.backgroundColor = '#e0e0e0';
+        progressBar.style.borderRadius = '5px';
+        
+        const progressFill = document.createElement('div');
+        progressFill.style.width = `${progress}%`;
+        progressFill.style.height = '20px';
+        progressFill.style.borderRadius = '5px';
+        progressFill.style.backgroundColor = '#76c7c0';
+
+        progressBar.appendChild(progressFill);
+        progressBarWrapper.appendChild(stageName);
+        progressBarWrapper.appendChild(progressBar);
+        progressContainer.appendChild(progressBarWrapper);
+      });
+    }
+  </script>
+        
 </body>
 </html>
